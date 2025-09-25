@@ -60,7 +60,7 @@ class User(AbstractBaseUser,PermissionsMixin):
     
 
 class Profile(models.Model):
-    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    user = models.ForeignKey(User,on_delete=models.CASCADE,)
     first_name = models.CharField(max_length=250)
     last_name = models.CharField(max_length=250)
     profession = models.CharField(max_length=200)

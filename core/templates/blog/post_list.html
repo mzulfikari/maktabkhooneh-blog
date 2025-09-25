@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List</title>
+</head>
+<body>
+
+    <h1>blog Post</h1>
+    {% for post in posts %}
+    <div>
+       <li>
+
+      <a href="{% url 'blog:post-detail' pk=post.id %}"> <h2>{{post.id}}. عنوان :{{post.title}}</h2></a>
+      <a href="{% url 'blog:post-edit' pk=post.id %}">
+        <h5>Edit</h5>
+      </a>
+        <p>  کپشن :{{post.content}}</p>
+        <p> تاریخ انتشار : {{post.published_date}}</p>
+        <p>   تاریخ ایجاد : {{post.created_date}}</p>
+       </li>
+    </div>
+    {% endfor %} 
+
+
+ 
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+</body>
+</html>
