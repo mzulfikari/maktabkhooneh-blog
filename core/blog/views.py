@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView
-from django.views.generic import ListView,DetailView,RedirectView,FormView,CreateView,UpdateView
+from django.views.generic import ListView,DetailView,RedirectView,FormView,CreateView,UpdateView,DeleteView
 from .models import Post,Category
 from django.shortcuts import get_list_or_404
 from .forms import PostForm
@@ -44,15 +44,15 @@ class PostDetail(DetailView):
     
     context_object_name = 'posts'
     
-class PostForm(FormView):
+# class PostForm(FormView):
     
-    template_name ='blog/contact_us.html'
-    form_class = PostForm
-    success_url = '/posts/'
+#     template_name ='blog/contact_us.html'
+#     form_class = PostForm
+#     success_url = '/posts/'
     
-    def form_valid(self, form):
-        form.save()
-        return super().form_valid(form)
+#     def form_valid(self, form):
+#         form.save()
+#         return super().form_valid(form)
 
 
 class PostCreated(CreateView):
@@ -74,6 +74,8 @@ class PostEdit(UpdateView):
     success_url = '/posts/'
     template_name = 'blog/post_form.html'
     
-    def form_valid(self, form):
-        form.instance.author = self.request.user
-        return super().form_valid(form)
+
+class PostDelete(DeleteView):
+    
+    model = Post
+    success_url = '/posts/'
