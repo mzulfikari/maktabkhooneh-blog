@@ -4,6 +4,9 @@ from django.views.generic import ListView,DetailView,RedirectView,FormView,Creat
 from .models import Post,Category
 from django.shortcuts import get_list_or_404
 from .forms import PostForm
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import HttpResponse
+
 
 class Index(TemplateView):
     
@@ -24,7 +27,7 @@ class RedirectMaktanKhoneh(RedirectView):
     url = 'https://maktabkhooneh.org/'
 
 
-class Posts(ListView):
+class Posts(LoginRequiredMixin,ListView):
     """
     To list the books on the main page based on their activeness
     
@@ -38,7 +41,7 @@ class Posts(ListView):
         return posts
  
 
-class PostDetail(DetailView):
+class PostDetail(LoginRequiredMixin,DetailView):
     """ Show details about each post """
     model = Post
     
@@ -55,7 +58,7 @@ class PostDetail(DetailView):
 #         return super().form_valid(form)
 
 
-class PostCreated(CreateView):
+class PostCreated(LoginRequiredMixin,CreateView):
     
     model = Post
     fields = ['title','content','category','status','published_date']
@@ -67,7 +70,7 @@ class PostCreated(CreateView):
         return super().form_valid(form)
     
 
-class PostEdit(UpdateView):
+class PostEdit(LoginRequiredMixin,UpdateView):
     
     model = Post
     form_class = PostForm
@@ -75,7 +78,10 @@ class PostEdit(UpdateView):
     template_name = 'blog/post_form.html'
     
 
-class PostDelete(DeleteView):
+class PostDelete(LoginRequiredMixin,DeleteView):
     
     model = Post
     success_url = '/posts/'
+    
+    
+    
