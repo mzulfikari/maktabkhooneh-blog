@@ -5,8 +5,11 @@ from . import views
 app_name = "api-v1"
 
 urlpatterns = [  
-    path('post/',views.postlist,name="api-post-views"),
-    path('post/<int:id>/',views.postDetail,name='post-detail')
+    # path('post/',views.postlist,name="api-post-views"),
+    # path('post/<int:id>/',views.postDetail,name='post-detail')
+
+    path('post/',views.PostList.as_view(),name="api-post-views"),
+    path('post/<int:pk>/',views.PostDetail.as_view(),name="api-post-views"),
    
 
 ]
