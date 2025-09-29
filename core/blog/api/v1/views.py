@@ -1,11 +1,12 @@
 from rest_framework.permissions import IsAuthenticated,IsAuthenticatedOrReadOnly
 from rest_framework.response import Response
-from .serializers import PostSerializer
-from ...models import Post
+from .serializers import PostSerializer,CategorySerializer
+from ...models import Post,Category
 from rest_framework import status
 from django.shortcuts import get_object_or_404
 from rest_framework.views import APIView
 from rest_framework.generics import ListCreateAPIView,RetrieveUpdateDestroyAPIView
+from rest_framework import viewsets
 
 
 
@@ -124,9 +125,9 @@ def postDetail(request,id):
         return Response({"detail":"item remove"},status=status.HTTP_204_NO_CONTENT)
 
         
-    '''
+'''
     
-class PostList(ListCreateAPIView):
+'''class PostList(ListCreateAPIView):
     """
     getting a list of posts and creating new post
     """
@@ -134,8 +135,38 @@ class PostList(ListCreateAPIView):
     serializer_class = PostSerializer
     queryset = Post.objects.filter(status=True)
         
+'''
+
+'''class PostViewSet(viewsets.ViewSet):
+    """
+    getting a list of posts and creating new post
+    """
+    permission_classes = [IsAuthenticated]
+    serializer_class = PostSerializer
+    queryset = Post.objects.filter(status=True)
+    
+    def list(self,request):
+        serializer = self.serializer_class(self.queryset,many=True)
+        return Response(serializer.data)
+    
+    def create(self, request):
+     return Response({"detail": "Not implemented yet."}, status=501)
+
+    def retrieve(self, request, pk=None):
+     return Response({"detail": "Not implemented yet."}, status=501)
+
+    def update(self, request, pk=None):
+     return Response({"detail": "Not implemented yet."}, status=501)
+
+    def partial_update(self, request, pk=None):
+     return Response({"detail": "Not implemented yet."}, status=501)
+ 
+    def destroy(self, request, pk=None):
+     return Response({"detail": "Not implemented yet."}, status=501)
+    
+    '''
         
-class PostDetail(RetrieveUpdateDestroyAPIView):
+'''class PostDetail(RetrieveUpdateDestroyAPIView):
     """
     getting a detail of post and edit plus removing it
     """
@@ -143,8 +174,21 @@ class PostDetail(RetrieveUpdateDestroyAPIView):
     serializer_class = PostSerializer
     queryset = Post.objects.filter(status=True)
         
+        '''
         
         
-
+class PostModelViewSet(viewsets.ModelViewSet):
+    """
+    getting a list of posts and creating new post
+    """
+    permission_classes = [IsAuthenticated]
+    serializer_class = PostSerializer
+    queryset = Post.objects.filter(status=True)
     
+        
+class CategoryModelViewSet(viewsets.ModelViewSet):
+    
+    permission_classes = [IsAuthenticated]
+    serializer_class = CategorySerializer
+    queryset = Category.objects.all()    
         
