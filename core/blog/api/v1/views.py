@@ -8,6 +8,11 @@ from rest_framework.views import APIView
 from rest_framework.generics import ListCreateAPIView,RetrieveUpdateDestroyAPIView
 from rest_framework import viewsets
 from .permissions import IsOwnerOrReadOnly
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.filters import SearchFilter,OrderingFilter
+from .paginations import DefaultPagination
+
+
 
 
 # Define method to get posts and send them
@@ -41,10 +46,11 @@ def postDetail(request,id):
     elif request.method == "DELETE":
         post.delete()
         return Response({"detail":"item remove"},status=status.HTTP_204_NO_CONTENT)
-      """
+"""
       
       
-'''class PostList(APIView):
+'''
+class PostList(APIView):
     """
     getting a list of posts and creating new post
     """
@@ -69,7 +75,8 @@ def postDetail(request,id):
         return Response(serializer.data)
         '''
         
-'''class PostDetail(APIView):
+'''
+class PostDetail(APIView):
     """
     getting a detail of post and edit plus removing it
     """
@@ -97,7 +104,8 @@ def postDetail(request,id):
         return Response({"detail":"item remove"},status=status.HTTP_204_NO_CONTENT)        
 '''
           
-'''class PostDetail(APIView):
+'''
+class PostDetail(APIView):
     """
     getting a detail of post and edit plus removing it
     """
@@ -127,7 +135,8 @@ def postDetail(request,id):
         
 '''
     
-'''class PostList(ListCreateAPIView):
+'''
+class PostList(ListCreateAPIView):
     """
     getting a list of posts and creating new post
     """
@@ -137,7 +146,8 @@ def postDetail(request,id):
         
 '''
 
-'''class PostViewSet(viewsets.ViewSet):
+'''
+class PostViewSet(viewsets.ViewSet):
     """
     getting a list of posts and creating new post
     """
@@ -164,9 +174,10 @@ def postDetail(request,id):
     def destroy(self, request, pk=None):
      return Response({"detail": "Not implemented yet."}, status=501)
     
-    '''
+'''
         
-'''class PostDetail(RetrieveUpdateDestroyAPIView):
+'''
+class PostDetail(RetrieveUpdateDestroyAPIView):
     """
     getting a detail of post and edit plus removing it
     """
@@ -174,7 +185,7 @@ def postDetail(request,id):
     serializer_class = PostSerializer
     queryset = Post.objects.filter(status=True)
         
-        '''
+'''
         
         
 class PostModelViewSet(viewsets.ModelViewSet):
@@ -184,6 +195,12 @@ class PostModelViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated,IsOwnerOrReadOnly]
     serializer_class = PostSerializer
     queryset = Post.objects.filter(status=True)
+    filter_backends = [DjangoFilterBackend,SearchFilter,OrderingFilter]
+    filterset_fields = {'category':["exact","in"],'author':["exact"],'status':["exact"]}
+    search_fields = ['title','content']
+    ordering_fields = ['published_date']
+    pagination_class = DefaultPagination
+    
     
         
 class CategoryModelViewSet(viewsets.ModelViewSet):

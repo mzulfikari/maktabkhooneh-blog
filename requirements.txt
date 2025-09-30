@@ -1,6 +1,14 @@
+# general modules
 django 
 Pillow
 djangorestframework
-markdown      
+
+
+# third party modules
+markdown     
 django-filter
 coreapi
+drf-yasg[validation]
+
+
+# deployment modules
