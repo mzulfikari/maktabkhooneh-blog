@@ -11,6 +11,7 @@ from rest_framework.views import APIView
 from django.contrib.auth import get_user_model
 from django.shortcuts import get_object_or_404
 from ...models import Profile
+from mail_templated import send_mail
 
 
 User = get_user_model() 
@@ -85,3 +86,9 @@ class ProfileApiView(generics.RetrieveUpdateAPIView):
         queryset = self.get_queryset()
         obj = get_object_or_404(queryset,user=self.request.user)
         return obj
+    
+class TestEmailSend(generics.GenericAPIView):
+    
+    def get(self, request, *args, **kwargs):
+        send_mail('email/test.tpl',{'name':'Morteza'},'admin@admin.com', ['morteza1383@gmail.com'])
+        return Response ("email sent")
