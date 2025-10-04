@@ -12,7 +12,8 @@ from django.contrib.auth import get_user_model
 from django.shortcuts import get_object_or_404
 from ...models import Profile
 from mail_templated import send_mail
-
+from mail_templated import EmailMessage
+from ..utils import EmailThread
 
 User = get_user_model() 
 
@@ -45,6 +46,7 @@ class CustomAuthToken(ObtainAuthToken):
             'user_id': user.pk,
             'email': user.email
         })
+ 
         
 class CustomDiscaAuthToken(APIView):
     """Log out of the user and delete the generated token"""
@@ -54,7 +56,7 @@ class CustomDiscaAuthToken(APIView):
         request.user.auth_token.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
  
-    
+   
 class ChangePasswordApiView(generics.GenericAPIView):
     """ To change user password by implementing advanced elements """
     model = User
@@ -77,6 +79,7 @@ class ChangePasswordApiView(generics.GenericAPIView):
         return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
     
 
+
 class ProfileApiView(generics.RetrieveUpdateAPIView):
     """Display the relevant user information with the ability to edit"""
     serializer_class = ProfileSerializer
@@ -86,9 +89,12 @@ class ProfileApiView(generics.RetrieveUpdateAPIView):
         queryset = self.get_queryset()
         obj = get_object_or_404(queryset,user=self.request.user)
         return obj
-    
+
+   
 class TestEmailSend(generics.GenericAPIView):
     
-    def get(self, request, *args, **kwargs):
-        send_mail('email/test.tpl',{'name':'Morteza'},'admin@admin.com', ['morteza1383@gmail.com'])
+    """E-mail test with optimal threading"""
+    def get(self,request,*args,**kwargs):
+        email_obg = EmailMessage('email/test.tpl', {'name': 'morteza'}, 'admin@admin.com',to=['morteza1383@gmail.com'])
+        EmailThread(EmailThread).start()
         return Response ("email sent")
