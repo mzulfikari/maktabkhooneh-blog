@@ -4,9 +4,11 @@ from django.contrib.auth.password_validation import validate_password
 from django.core import exceptions
 from django.contrib.auth import authenticate
 from django.utils.translation import gettext_lazy as _
+from ...models import Profile
 
 
 class RegistrationsSerializer(serializers.ModelSerializer):
+    """User registration with e-mail and verification of the correctness of the entered password"""
     password1 = serializers.CharField(max_length=255,write_only=True)
     
     class Meta :
@@ -32,6 +34,7 @@ class RegistrationsSerializer(serializers.ModelSerializer):
     
     
 class CustomAuthTokenSerializer(serializers.Serializer):
+    
     email = serializers.CharField(
         label=_("Email"),
         write_only=True
@@ -61,6 +64,8 @@ class CustomAuthTokenSerializer(serializers.Serializer):
             if not user:
                 msg = _('Unable to log in with provided credentials.')
                 raise serializers.ValidationError(msg, code='authorization')
+            if not user.is_verified:
+                raise serializers.ValidationError({'detail':'user is not verified'})
         else:
             msg = _('Must include "username" and "password".')
             raise serializers.ValidationError(msg, code='authorization')
@@ -69,7 +74,7 @@ class CustomAuthTokenSerializer(serializers.Serializer):
         return attrs
     
 class ChangePasswordSerializer(serializers.Serializer):
-    
+    """To change a user's password by checking the current password"""
     old_password = serializers.CharField(required=True)
     new_password = serializers.CharField(required=True)
     new_password1 = serializers.CharField(required=True)
@@ -87,5 +92,10 @@ class ChangePasswordSerializer(serializers.Serializer):
     
     
 
+class ProfileSerializer(serializers.ModelSerializer):
+    """Display user information and update it"""
+    email = serializers.CharField(source='user.email',read_only=True)
     
-    
+    class Meta:
+        model = Profile
+        fields =  ('id','email','first_name','last_name','image','description')  

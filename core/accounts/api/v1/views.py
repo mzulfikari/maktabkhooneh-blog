@@ -1,5 +1,7 @@
 from rest_framework import generics
-from .serializers import RegistrationsSerializer,CustomAuthTokenSerializer,ChangePasswordSerializer
+from .serializers import (
+    RegistrationsSerializer,CustomAuthTokenSerializer,ChangePasswordSerializer,
+    ProfileSerializer)
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.authtoken.views import ObtainAuthToken
@@ -7,7 +9,10 @@ from rest_framework.authtoken.models import Token
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
 from django.contrib.auth import get_user_model
- 
+from django.shortcuts import get_object_or_404
+from ...models import Profile
+
+
 User = get_user_model() 
 
 class RegistrationApiView(generics.GenericAPIView):
@@ -23,7 +28,6 @@ class RegistrationApiView(generics.GenericAPIView):
             }
             return Response(data,status=status.HTTP_201_CREATED)
         return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
-    
     
 
 class CustomAuthToken(ObtainAuthToken):
@@ -70,3 +74,14 @@ class ChangePasswordApiView(generics.GenericAPIView):
             self.object.save()
             return Response({'detail':'password change successfully'},status=status.HTTP_200_OK)
         return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+    
+
+class ProfileApiView(generics.RetrieveUpdateAPIView):
+    """Display the relevant user information with the ability to edit"""
+    serializer_class = ProfileSerializer
+    queryset =Profile.objects.all()
+    
+    def get_object(self):
+        queryset = self.get_queryset()
+        obj = get_object_or_404(queryset,user=self.request.user)
+        return obj
