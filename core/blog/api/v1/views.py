@@ -1,18 +1,16 @@
-from rest_framework.permissions import IsAuthenticated,IsAuthenticatedOrReadOnly
+from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 from rest_framework.response import Response
-from .serializers import PostSerializer,CategorySerializer
-from ...models import Post,Category
+from .serializers import PostSerializer, CategorySerializer
+from ...models import Post, Category
 from rest_framework import status
 from django.shortcuts import get_object_or_404
 from rest_framework.views import APIView
-from rest_framework.generics import ListCreateAPIView,RetrieveUpdateDestroyAPIView
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework import viewsets
 from .permissions import IsOwnerOrReadOnly
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework.filters import SearchFilter,OrderingFilter
+from rest_framework.filters import SearchFilter, OrderingFilter
 from .paginations import DefaultPagination
-
-
 
 
 # Define method to get posts and send them
@@ -47,8 +45,8 @@ def postDetail(request,id):
         post.delete()
         return Response({"detail":"item remove"},status=status.HTTP_204_NO_CONTENT)
 """
-      
-      
+
+
 '''
 class PostList(APIView):
     """
@@ -74,7 +72,7 @@ class PostList(APIView):
         serializer.save()
         return Response(serializer.data)
         '''
-        
+
 '''
 class PostDetail(APIView):
     """
@@ -103,7 +101,7 @@ class PostDetail(APIView):
         post.delete()
         return Response({"detail":"item remove"},status=status.HTTP_204_NO_CONTENT)        
 '''
-          
+
 '''
 class PostDetail(APIView):
     """
@@ -134,7 +132,7 @@ class PostDetail(APIView):
 
         
 '''
-    
+
 '''
 class PostList(ListCreateAPIView):
     """
@@ -175,7 +173,7 @@ class PostViewSet(viewsets.ViewSet):
      return Response({"detail": "Not implemented yet."}, status=501)
     
 '''
-        
+
 '''
 class PostDetail(RetrieveUpdateDestroyAPIView):
     """
@@ -186,26 +184,29 @@ class PostDetail(RetrieveUpdateDestroyAPIView):
     queryset = Post.objects.filter(status=True)
         
 '''
-        
-        
+
+
 class PostModelViewSet(viewsets.ModelViewSet):
     """
     getting a list of posts and creating new post
     """
-    permission_classes = [IsAuthenticated,IsOwnerOrReadOnly]
+
+    permission_classes = [IsAuthenticated, IsOwnerOrReadOnly]
     serializer_class = PostSerializer
     queryset = Post.objects.filter(status=True)
-    filter_backends = [DjangoFilterBackend,SearchFilter,OrderingFilter]
-    filterset_fields = {'category':["exact","in"],'author':["exact"],'status':["exact"]}
-    search_fields = ['title','content']
-    ordering_fields = ['published_date']
+    filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
+    filterset_fields = {
+        "category": ["exact", "in"],
+        "author": ["exact"],
+        "status": ["exact"],
+    }
+    search_fields = ["title", "content"]
+    ordering_fields = ["published_date"]
     pagination_class = DefaultPagination
-    
-    
-        
+
+
 class CategoryModelViewSet(viewsets.ModelViewSet):
-    
+
     permission_classes = [IsAuthenticated]
     serializer_class = CategorySerializer
-    queryset = Category.objects.all()    
-        
+    queryset = Category.objects.all()

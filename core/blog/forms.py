@@ -1,9 +1,15 @@
 from django import forms
-from.models import Post
+from .models import Post
 
 
 class PostForm(forms.ModelForm):
-    
+
     class Meta:
         model = Post
-        fields = ['title','content','category','status','published_date',]
+        fields = [
+            "title",
+            "content",
+            "category",
+            "status",
+            "published_date",
+        ]
