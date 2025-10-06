@@ -1,3 +1,4 @@
+from decouple import config
 from pathlib import Path
 from datetime import timedelta
 
@@ -9,10 +10,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure--kgg3(n!c8avcv&dn$^=d@alcjh@)jm0eehpl@g)$qx2iv89s)"
+SECRET_KEY = config("SECRET_KEY",default="test")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config("DEBUG",cast=bool,default=True)
 
 ALLOWED_HOSTS = []
 
