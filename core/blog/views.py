@@ -1,19 +1,15 @@
-from django.shortcuts import render
 from django.views.generic import TemplateView
 from django.views.generic import (
     ListView,
     DetailView,
     RedirectView,
-    FormView,
     CreateView,
     UpdateView,
     DeleteView,
 )
-from .models import Post, Category
-from django.shortcuts import get_list_or_404
+from .models import Post
 from .forms import PostForm
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import HttpResponse
 
 
 class Index(TemplateView):

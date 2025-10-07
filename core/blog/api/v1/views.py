@@ -1,11 +1,9 @@
-from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly,AllowAny
-from rest_framework.response import Response
+from rest_framework.permissions import (
+    IsAuthenticated,
+    IsAuthenticatedOrReadOnly,
+)
 from .serializers import PostSerializer, CategorySerializer
 from ...models import Post, Category
-from rest_framework import status
-from django.shortcuts import get_object_or_404
-from rest_framework.views import APIView
-from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework import viewsets
 from .permissions import IsOwnerOrReadOnly
 from django_filters.rest_framework import DjangoFilterBackend
@@ -15,7 +13,7 @@ from .paginations import DefaultPagination
 
 # Define method to get posts and send them
 """
-@api_view(["GET","POST"]) 
+@api_view(["GET","POST"])
 @permission_classes([IsAuthenticatedOrReadOnly])
 def postlist(request):
     if request.method == "GET":
@@ -27,9 +25,9 @@ def postlist(request):
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data)
-        
-        
-        @api_view(["GET","PUT","DELETE"]) 
+
+
+        @api_view(["GET","PUT","DELETE"])
 @permission_classes([IsAuthenticatedOrReadOnly])
 def postDetail(request,id):
     post = get_object_or_404(Post,pk=id)
@@ -54,7 +52,7 @@ class PostList(APIView):
     """
     permission_classes = [IsAuthenticated]
     serializer_class = PostSerializer
-    
+
     def get(self,request):
         """
         retrieving a list of posts
@@ -62,7 +60,7 @@ class PostList(APIView):
         posts = Post.objects.filter(status=True)
         serializer = PostSerializer(posts,many=True)
         return Response(serializer.data)
-    
+
     def post(self,request):
         """
         creating a post with provided data
@@ -80,13 +78,13 @@ class PostDetail(APIView):
     """
     permission_classes = [IsAuthenticated]
     serializer_class = PostSerializer
-    
+
     def get(self,request,id):
         """ retrieving the post data """
         post = get_object_or_404(Post,pk=id,status=True)
         serializer = self.serializer_class(post)
         return Response(serializer.data)
-    
+
     def put(self,request,id):
         """editing the post data"""
         post = get_object_or_404(Post,pk=id,status=True)
@@ -94,12 +92,12 @@ class PostDetail(APIView):
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data)
-    
+
     def delete(self,request,id):
         """ delete the post object """
         post = get_object_or_404(Post,pk=id,status=True)
         post.delete()
-        return Response({"detail":"item remove"},status=status.HTTP_204_NO_CONTENT)        
+        return Response({"detail":"item remove"},status=status.HTTP_204_NO_CONTENT)
 '''
 
 '''
@@ -109,13 +107,13 @@ class PostDetail(APIView):
     """
     permission_classes = [IsAuthenticated]
     serializer_class = PostSerializer
-    
+
     def get(self,request,id):
         """ retrieving the post data """
         post = get_object_or_404(Post,pk=id,status=True)
         serializer = self.serializer_class(post)
         return Response(serializer.data)
-    
+
     def put(self,request,id):
         """editing the post data"""
         post = get_object_or_404(Post,pk=id,status=True)
@@ -123,14 +121,14 @@ class PostDetail(APIView):
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data)
-    
+
     def delete(self,request,id):
         """ delete the post object """
         post = get_object_or_404(Post,pk=id,status=True)
         post.delete()
         return Response({"detail":"item remove"},status=status.HTTP_204_NO_CONTENT)
 
-        
+
 '''
 
 '''
@@ -141,7 +139,7 @@ class PostList(ListCreateAPIView):
     permission_classes = [IsAuthenticated]
     serializer_class = PostSerializer
     queryset = Post.objects.filter(status=True)
-        
+
 '''
 
 '''
@@ -152,11 +150,11 @@ class PostViewSet(viewsets.ViewSet):
     permission_classes = [IsAuthenticated]
     serializer_class = PostSerializer
     queryset = Post.objects.filter(status=True)
-    
+
     def list(self,request):
         serializer = self.serializer_class(self.queryset,many=True)
         return Response(serializer.data)
-    
+
     def create(self, request):
      return Response({"detail": "Not implemented yet."}, status=501)
 
@@ -168,10 +166,10 @@ class PostViewSet(viewsets.ViewSet):
 
     def partial_update(self, request, pk=None):
      return Response({"detail": "Not implemented yet."}, status=501)
- 
+
     def destroy(self, request, pk=None):
      return Response({"detail": "Not implemented yet."}, status=501)
-    
+
 '''
 
 '''
@@ -182,7 +180,7 @@ class PostDetail(RetrieveUpdateDestroyAPIView):
     permission_classes = [IsAuthenticated]
     serializer_class = PostSerializer
     queryset = Post.objects.filter(status=True)
-        
+
 '''
 
 

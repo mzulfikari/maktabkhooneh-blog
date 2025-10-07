@@ -15,7 +15,6 @@ from rest_framework.views import APIView
 from django.contrib.auth import get_user_model
 from django.shortcuts import get_object_or_404
 from ...models import Profile
-from mail_templated import send_mail
 from mail_templated import EmailMessage
 from ..utils import EmailThread
 from rest_framework_simplejwt.tokens import RefreshToken
@@ -146,7 +145,7 @@ class TestEmailSend(generics.GenericAPIView):
 
 class ActivationApiView(APIView):
 
-    def get(self, request, *args, **kwargs):
+    def get(self, request, token, *args, **kwargs):
         try:
             token = jwt.decode(token, settings.SECRET_KEY, algorithms=["HS256"])
             user_id = token.get("user_id")

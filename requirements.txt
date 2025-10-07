@@ -10,6 +10,7 @@ django-filter
 coreapi
 drf-yasg[validation]
 djoser
+Faker
 
 
 # deployment modules
@@ -23,3 +24,5 @@ black
 flake8
 pytest
 pytest-django
+autopep8
+autoflake
