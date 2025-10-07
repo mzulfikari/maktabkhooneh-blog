@@ -34,7 +34,6 @@ class Category(models.Model):
     """
     this is a class to define categories for blog table
     """
-
     name = models.CharField(max_length=250)
 
     def __str__(self):

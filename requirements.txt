@@ -2,6 +2,7 @@
 django 
 Pillow
 djangorestframework
+python-decouple
 
 
 # third party modules
@@ -27,3 +28,8 @@ pytest
 pytest-django
 autopep8
 autoflake
+
+# background proccess and cache
+celery
+redis
+
