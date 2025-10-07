@@ -11,6 +11,7 @@ coreapi
 drf-yasg[validation]
 djoser
 Faker
+django-cors-headers
 
 
 # deployment modules

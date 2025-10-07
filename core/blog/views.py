@@ -14,7 +14,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 class Index(TemplateView):
     """Show a templates index"""
-
     template_name = "blog/index.html"
 
     def get_context_data(self, **kwargs):
@@ -22,11 +21,14 @@ class Index(TemplateView):
         context["name"] = "Morteza"
         context["post"] = Post.objects.all()
         return context
+    
+class Index_Api(TemplateView):
+    """Show a templates index"""
+    template_name = "blog/index_api.html"
 
 
 class RedirectMaktanKhoneh(RedirectView):
     """Redirect To website  MaktanKhoneh"""
-
     url = "https://maktabkhooneh.org/"
 
 
@@ -35,15 +37,12 @@ class Posts(LoginRequiredMixin, ListView):
     To list the books on the main page based on their activeness
 
     """
-
     context_object_name = "posts"
     paginate_by = 2
     ordering = ["created_date"]
-
     def get_queryset(self):
         posts = Post.objects.filter(status=True).order_by("-created_date")
         return posts
-
 
 class PostDetail(LoginRequiredMixin, DetailView):
     """Show details about each post"""
