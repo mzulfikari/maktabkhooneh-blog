@@ -202,9 +202,22 @@ CORS_ALLOW_CREDENTIALS: True
 CELERY_BROKER_URL = 'redis://redis:6379/1'
 
 # Scheduling tasks for Celery
-CELERY_BEAT_SCHEDULE = {
-    'send_email':{
-        'task' : 'accounts.tasks.sendEmail',
-        'schedule':10
+# CELERY_BEAT_SCHEDULE = {
+#     'send_email':{
+#         'task' : 'accounts.tasks.sendEmail',
+#         'schedule':10
+#     }
+# }
+
+
+# chasing configs
+
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://redis:6379/2",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
     }
 }

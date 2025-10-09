@@ -1,5 +1,7 @@
 from django.urls import path, include
 from . import views
+from django.views.decorators.cache import cache_page
+
 
 app_name = "accounts"
 
