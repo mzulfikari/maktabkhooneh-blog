@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "mail_templated",
     "djoser",
     "corsheaders",
+    'django_celery_beat',
 ]
 
 MIDDLEWARE = [
@@ -107,9 +108,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
 
-LANGUAGE_CODE = "en-us"
+LANGUAGE_CODE = "fa-ir"
 
-TIME_ZONE = "UTC"
+TIME_ZONE = "Asia/Tehran"
 
 USE_I18N = True
 
@@ -195,3 +196,15 @@ SIMPLE_JWT = {
 # ]
 
 CORS_ALLOW_CREDENTIALS: True
+
+
+# celery configs
+CELERY_BROKER_URL = 'redis://redis:6379/1'
+
+# Scheduling tasks for Celery
+CELERY_BEAT_SCHEDULE = {
+    'send_email':{
+        'task' : 'accounts.tasks.sendEmail',
+        'schedule':10
+    }
+}

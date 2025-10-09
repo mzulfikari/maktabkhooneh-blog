@@ -32,4 +32,5 @@ autoflake
 # background proccess and cache
 celery
 redis
+django-celery-beat
 

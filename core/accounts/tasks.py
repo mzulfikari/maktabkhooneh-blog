@@ -5,5 +5,5 @@ from time import sleep
 
 @shared_task
 def sendEmail():
-    sleep(3)
+    sleep(6)
     print('done sending email')

@@ -22,3 +22,22 @@ services:
       - DEBUG=True
     depends_on:
       - redis
+
+  worker:
+     build: .
+     command: celery -A core worker --loglevel=info
+     volumes:
+      - ./core:/app
+     depends_on:
+     - redis
+     - backend
+     
+  beat:
+    build: .
+    container_name: celery_beat
+    command: celery -A core beat -l info --schedule /app/celerybeat-schedule
+    volumes:
+      - ./core:/app
+    depends_on:
+      - redis
+      - backend
