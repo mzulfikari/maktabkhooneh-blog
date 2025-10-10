@@ -5,7 +5,7 @@
 
 #### 📘 Course Topics
 
-• Introduction of the Course 
+**Introduction of the Course**
 
 Setting up Project with Docker (Dockerfile, docker-compose)
 
