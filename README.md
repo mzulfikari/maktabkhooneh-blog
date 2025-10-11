@@ -43,8 +43,10 @@
 
 **Django CD with GitHub Actions**
 
-### 👨‍🏫 Instructor
+<h3>👨‍🏫 Instructor</h3>
 
-This project was developed under the mentorship of [Ali Bigdeli](https://github.com/AliBigdeli) — a seasoned software engineer and instructor with extensive experience in professional and specialized software development.
-
-📎 GitHub: [github.com/AliBigdeli](https://github.com/AliBigdeli)
+<div style="border: 1px solid #ccc; border-radius: 8px; padding: 16px; background-color: #f9f9f9;">
+  <strong>Ali Bigdeli</strong> — a highly experienced software engineer and educator, renowned for his contributions to professional software architecture, backend development, and technical training.<br><br>
+  🔗 <a href="https://github.com/AliBigdeli" target="_blank">GitHub Profile</a><br>
+  📚 <em>Expertise:</em> Software Engineering · System Design · Technical Mentorship · Advanced Backend Development
+</div>
