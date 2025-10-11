@@ -42,3 +42,9 @@
 **Buy and Setup VPS (IaaS)**
 
 **Django CD with GitHub Actions**
+
+### 👨‍🏫 Instructor
+
+This project was developed under the mentorship of [Ali Bigdeli](https://github.com/AliBigdeli) — a seasoned software engineer and instructor with extensive experience in professional and specialized software development.
+
+📎 GitHub: [github.com/AliBigdeli](https://github.com/AliBigdeli)
