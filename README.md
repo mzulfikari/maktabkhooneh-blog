@@ -43,7 +43,7 @@
 
 **Django CD with GitHub Actions**
 
-<h3>👨‍🏫 Instructor</h3>
+##👨‍🏫 Instructor
 
 <div style="border: 1px solid #ccc; border-radius: 8px; padding: 16px; background-color: #f9f9f9;">
   <strong>Ali Bigdeli</strong> — a highly experienced software engineer and educator, renowned for his contributions to professional software architecture, backend development, and technical training.<br><br>
