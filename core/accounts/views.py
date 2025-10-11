@@ -16,3 +16,4 @@ def send_email(request):
 # def test(request):
 #     response = requests.get("////")
 #     return JsonResponse(response.json())
+
