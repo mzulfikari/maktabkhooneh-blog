@@ -7,38 +7,38 @@
 
 **Introduction of the Course**
 
-Setting up Project with Docker (Dockerfile, docker-compose)
+**Setting up Project with Docker (Dockerfile, docker-compose)**
 
-Setup Django Model for a Blog and AbstractBaseUser
+**Setup Django Model for a Blog and AbstractBaseUser**
 
-Implement Class Based Views
+**Implement Class Based Views**
 
-Django Rest Framework and Serializers (FBV)
+**Django Rest Framework and Serializers (FBV)**
 
-Class Based Views in Rest Framework (views, generic, viewset)
+**Class Based Views in Rest Framework (views, generic, viewset)**
 
-API Documentation with Swagger and Redoc
+**API Documentation with Swagger and Redoc**
 
-Authentication API (Token / JWT)
+**Authentication API (Token / JWT)**
 
-Reformat and Lint (flake8, black)
+**Reformat and Lint (flake8, black)**
 
-Django TestCase and PyTest
+**Django TestCase and PyTest**
 
-Django CI with GitHub Actions
+**Django CI with GitHub Actions**
 
-Populate Database with Faker and Django Commands
+**Populate Database with Faker and Django Commands**
 
-CORS Headers
+**CORS Headers**
 
-Load Testing with Locust
+**Load Testing with Locust**
 
-Background Process with Celery and Redis
+**Background Process with Celery and Redis**
 
-Caching with Redis
+**Caching with Redis**
 
-Get Ready for Deploy (Gunicorn, Nginx)
+**Get Ready for Deploy (Gunicorn, Nginx)**
 
-Buy and Setup VPS (IaaS)
+**Buy and Setup VPS (IaaS)**
 
-Django CD with GitHub Actions
+**Django CD with GitHub Actions**
