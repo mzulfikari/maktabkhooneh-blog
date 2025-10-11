@@ -43,10 +43,11 @@
 
 **Django CD with GitHub Actions**
 
-<h2>👨‍🏫 Instructor</h2>
+<h2>👨‍🏫 <strong>Instructor</strong></h2>
 
-<div style="border: 1px solid #ccc; border-radius: 8px; padding: 16px; background-color: #f9f9f9;">
+<div style="border: 1px solid #d0d7de; border-radius: 10px; padding: 18px; background-color: #f6f8fa; font-weight: bold; line-height: 1.6;">
   <strong>Ali Bigdeli</strong> — a highly experienced software engineer and educator, renowned for his contributions to professional software architecture, backend development, and technical training.<br><br>
-  🔗 <a href="https://github.com/AliBigdeli" target="_blank">GitHub Profile</a><br>
-  📚 <em>Expertise:</em> Software Engineering · System Design · Technical Mentorship · Advanced Backend Development
+  🔗 <a href="https://github.com/AliBigdeli" target="_blank" style="color: #0969da; text-decoration: none;">GitHub Profile</a><br>
+  📚 <strong>Expertise:</strong> Software Engineering · System Design · Technical Mentorship · Advanced Backend Development
 </div>
+
