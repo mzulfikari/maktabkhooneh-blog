@@ -1,3 +1,44 @@
-# Home school training course taught by Professor Ali Bigdeli
+### Home school training course taught by Professor Ali Bigdeli
 
-![توضیح تصویر]("docs\193206907-8a98755f-37b3-4a53-82c2-936e7aea69d5.jpg")
+![alt text](docs/193206907-8a98755f-37b3-4a53-82c2-936e7aea69d5.jpg)
+
+
+### 📘 Course Topics
+
+**Introduction of the Course**
+
+Setting up Project with Docker (Dockerfile, docker-compose)
+
+Setup Django Model for a Blog and AbstractBaseUser
+
+Implement Class Based Views
+
+Django Rest Framework and Serializers (FBV)
+
+Class Based Views in Rest Framework (views, generic, viewset)
+
+API Documentation with Swagger and Redoc
+
+Authentication API (Token / JWT)
+
+Reformat and Lint (flake8, black)
+
+Django TestCase and PyTest
+
+Django CI with GitHub Actions
+
+Populate Database with Faker and Django Commands
+
+CORS Headers
+
+Load Testing with Locust
+
+Background Process with Celery and Redis
+
+Caching with Redis
+
+Get Ready for Deploy (Gunicorn, Nginx)
+
+Buy and Setup VPS (IaaS)
+
+Django CD with GitHub Actions
